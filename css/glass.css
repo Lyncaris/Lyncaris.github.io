@@ -1,0 +1,62 @@
+/* 磨砂玻璃卡片：让文章、首页文章卡片和侧栏卡片透出背景 */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.80);
+    --glass-bg-mobile: rgba(255, 255, 255, 0.88);
+    --glass-border: rgba(255, 255, 255, 0.55);
+    --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+}
+
+[data-theme='dark'] {
+    --glass-bg: rgba(18, 18, 18, 0.76);
+    --glass-bg-mobile: rgba(18, 18, 18, 0.86);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
+}
+
+.layout > div:first-child:not(.nc),
+#aside-content .card-widget,
+#recent-posts .recent-post-item {
+    background: var(--glass-bg) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+.layout > div:first-child:not(.nc):hover,
+#aside-content .card-widget:hover,
+#recent-posts .recent-post-item:hover {
+    box-shadow: 0 10px 36px rgba(31, 38, 135, 0.18);
+}
+
+[data-theme='dark'] .layout > div:first-child:not(.nc):hover,
+[data-theme='dark'] #aside-content .card-widget:hover,
+[data-theme='dark'] #recent-posts .recent-post-item:hover {
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.4);
+}
+
+/* 手机端降低模糊强度，兼顾磨砂效果和滚动性能 */
+@media (max-width: 768px) {
+    .layout > div:first-child:not(.nc),
+    #aside-content .card-widget,
+    #recent-posts .recent-post-item {
+        background: var(--glass-bg-mobile) !important;
+        -webkit-backdrop-filter: blur(8px) saturate(130%);
+        backdrop-filter: blur(8px) saturate(130%);
+    }
+}
+
+/* 不支持 backdrop-filter 的浏览器保持足够对比度 */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .layout > div:first-child:not(.nc),
+    #aside-content .card-widget,
+    #recent-posts .recent-post-item {
+        background: rgba(255, 255, 255, 0.92) !important;
+    }
+
+    [data-theme='dark'] .layout > div:first-child:not(.nc),
+    [data-theme='dark'] #aside-content .card-widget,
+    [data-theme='dark'] #recent-posts .recent-post-item {
+        background: rgba(18, 18, 18, 0.92) !important;
+    }
+}
