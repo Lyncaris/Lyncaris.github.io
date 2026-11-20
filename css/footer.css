@@ -15,3 +15,10 @@
     color: var(--font-color)
 }
 
+/* 移动端使用更小的首页横幅，减少流量并加快首屏 */
+@media (max-width: 768px) {
+    #page-header[style*="index.webp"] {
+        background-image: url('/img/index-mobile.webp') !important;
+    }
+}
+
